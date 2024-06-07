@@ -1,0 +1,31 @@
+import os
+
+def root_device():
+    try:
+        # Step 1: Enable USB debugging on your Android device
+        os.system("adb devices")
+
+        # Step 2: Reboot the device into bootloader
+        os.system("adb reboot bootloader")
+
+        # Step 3: Unlock the bootloader
+        os.system("fastboot oem unlock")
+
+        # Step 4: Flash a custom recovery (e.g., TWRP)
+        os.system("fastboot flash recovery twrp.img")
+
+        # Step 5: Reboot into recovery mode
+        os.system("fastboot reboot recovery")
+
+        # Step 6: Install Magisk for root access
+        os.system("adb sideload Magisk-v20.4.zip")
+
+        # Step 7: Reboot the device
+        os.system("adb reboot")
+
+        print("Device rooted successfully!")
+    except Exception as e:
+        print(f"An error occurred: {e}")
+
+if __name__ == "__main__":
+    root_device()
